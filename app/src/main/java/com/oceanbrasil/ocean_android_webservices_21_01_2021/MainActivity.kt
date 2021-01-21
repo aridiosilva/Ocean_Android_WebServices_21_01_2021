@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         tvResultado.text = "Carregando lista de pokémons..."
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://pokeapi.co/api/v2")
+            .baseUrl("https://pokeapi.co/api/v2/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
