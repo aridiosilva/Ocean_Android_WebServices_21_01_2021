@@ -2,8 +2,10 @@ package com.oceanbrasil.ocean_android_webservices_21_01_2021
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,6 +19,11 @@ class MainActivity : AppCompatActivity() {
 
         val tvResultado = findViewById<TextView>(R.id.tvResultado)
 
+        val ivPokemon = findViewById<ImageView>(R.id.ivPokemon)
+        val url =
+            "https://opiniaobomvaleapena.com.br/imagens/carregador-portatil-power-bank-pokebola-pokemon-go.png"
+        Glide.with(this).load(url).into(ivPokemon)
+
         tvResultado.text = "Carregando lista de pokémons..."
 
         val retrofit = Retrofit.Builder()
@@ -27,7 +34,6 @@ class MainActivity : AppCompatActivity() {
         val service = retrofit.create(PokemonService::class.java)
 
         val call = service.listPokemons()
-
 
         call.enqueue(object : Callback<PokemonApiResult> {
             override fun onResponse(
@@ -41,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                         tvResultado.text = ""
 
                         pokemons.forEach {
-                            tvResultado.append(it.name)
+                            tvResultado.append(it.name + "\n")
                         }
                     }
                 }
